@@ -1,0 +1,26 @@
+.env
+.env.local
+
+# Composer管理
+vendor/
+web/wp/
+
+# Composerで管理するプラグイン・テーマ（カスタムのみgit管理）
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+
+web/app/themes/*
+!web/app/themes/.gitkeep
+
+# mu-pluginsはbedrock-autoloader.phpのみgit管理
+web/app/mu-plugins/*
+!web/app/mu-plugins/bedrock-autoloader.php
+
+# 言語ファイル（デプロイ時にWP-CLIでインストール）
+web/app/languages/
+
+# メディア
+web/app/uploads/
+
+# 旧wp-content
+wp-content/
