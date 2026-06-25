@@ -18,6 +18,7 @@ web/app/themes/my-themepro/build/
 # mu-pluginsはbedrock-autoloader.phpのみgit管理
 web/app/mu-plugins/*
 !web/app/mu-plugins/bedrock-autoloader.php
+!web/app/mu-plugins/disable-xmlrpc.php
 
 # 言語ファイル（デプロイ時にWP-CLIでインストール）
 web/app/languages/
