@@ -1,0 +1,24 @@
+# blog.miyaoo.com を HTTPS 公開。cert-manager HTTP-01 で Let's Encrypt 証明書を自動取得。
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordpress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - blog.miyaoo.com
+      secretName: blog-miyaoo-tls
+  rules:
+    - host: blog.miyaoo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress
+                port:
+                  number: 80

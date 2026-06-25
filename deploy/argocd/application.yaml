@@ -1,0 +1,23 @@
+# ArgoCD への「何をどこに同期するか」の宣言
+# 初回のみ手動で適用: kubectl apply -f deploy/argocd/application.yaml
+# 以降は main の deploy/k8s/overlays/prod/ が変わると ArgoCD が自動でクラスタへ反映する
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wp-miyaoo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Citrus171/wp-miyaoo
+    targetRevision: main
+    path: deploy/k8s/overlays/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: blog-miyaoo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

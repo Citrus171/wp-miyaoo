@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      # コードをイメージからemptyDirへコピーし、nginx/php-fpmで共有する
+      initContainers:
+        - name: init-code
+          image: wp-miyaoo:latest
+          command: ["sh", "-c", "cp -a /var/www/html/. /mnt/html/"]
+          volumeMounts:
+            - name: html
+              mountPath: /mnt/html
+
+      containers:
+        - name: wordpress
+          image: wp-miyaoo:latest
+          env:
+            - name: WP_ENV
+              value: production
+            - name: WP_HOME
+              value: https://blog.miyaoo.com
+            - name: WP_SITEURL
+              value: https://blog.miyaoo.com/wp
+          envFrom:
+            - secretRef:
+                name: wp-secret
+          volumeMounts:
+            - name: html
+              mountPath: /var/www/html
+            - name: uploads
+              mountPath: /var/www/html/web/app/uploads
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: html
+              mountPath: /var/www/html
+            - name: uploads
+              mountPath: /var/www/html/web/app/uploads
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+
+      volumes:
+        - name: html
+          emptyDir: {}
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: wp-uploads
+        - name: nginx-config
+          configMap:
+            name: nginx-config

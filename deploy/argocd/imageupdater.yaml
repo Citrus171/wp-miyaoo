@@ -1,0 +1,26 @@
+# main push → GHCR に sha- タグ → Image Updater が検知 → kustomization.yaml へ git commit → 自動デプロイ
+# 初回のみ手動で適用: kubectl apply -f deploy/argocd/imageupdater.yaml
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: wp-miyaoo
+  namespace: argocd
+spec:
+  applicationRefs:
+    - namePattern: wp-miyaoo
+      commonUpdateSettings:
+        updateStrategy: newest-build
+        allowTags: regexp:^sha-
+        platforms:
+          - linux/amd64
+      writeBackConfig:
+        method: git
+        gitConfig:
+          branch: main
+          writeBackTarget: kustomization:.
+      images:
+        - alias: wordpress
+          imageName: ghcr.io/citrus171/wp-miyaoo
+          manifestTargets:
+            kustomize:
+              name: wp-miyaoo:latest
