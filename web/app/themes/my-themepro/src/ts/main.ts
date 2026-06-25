@@ -1,9 +1,5 @@
 import '../css/main.css'
+import Alpine from 'alpinejs'
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('my-themepro loaded')
-})
-
-// jQuery を使う場合（WordPressがロード済み）
-// declare const jQuery: JQueryStatic
-// jQuery(function ($) { ... })
+window.Alpine = Alpine
+Alpine.start()
