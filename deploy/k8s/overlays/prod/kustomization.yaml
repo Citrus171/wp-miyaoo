@@ -8,4 +8,4 @@ resources:
 images:
   - name: wp-miyaoo:latest
     newName: ghcr.io/citrus171/wp-miyaoo
-    newTag: sha-13736cc
+    newTag: sha-b583a20
