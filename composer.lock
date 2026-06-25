@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6759f3351abe33a51cf8af74b21462dc",
+    "content-hash": "70f3f184d150ff5b98ba2c4891451c53",
     "packages": [
         {
             "name": "composer/installers",
@@ -1134,42 +1134,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/contact-form-7/"
-        },
-        {
-            "name": "wpackagist-theme/kadence",
-            "version": "1.5.1",
-            "source": {
-                "type": "svn",
-                "url": "https://themes.svn.wordpress.org/kadence/",
-                "reference": "1.5.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/kadence.1.5.1.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-theme",
-            "homepage": "https://wordpress.org/themes/kadence/"
-        },
-        {
-            "name": "wpackagist-theme/twentytwentyfive",
-            "version": "1.5",
-            "source": {
-                "type": "svn",
-                "url": "https://themes.svn.wordpress.org/twentytwentyfive/",
-                "reference": "1.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/twentytwentyfive.1.5.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-theme",
-            "homepage": "https://wordpress.org/themes/twentytwentyfive/"
         }
     ],
     "packages-dev": [
