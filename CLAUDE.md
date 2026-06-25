@@ -190,3 +190,4 @@ jQuery(function ($) { ... })
 | [docs/editable-files.md](docs/editable-files.md) | ファイル編集可否一覧（ツリー構造） |
 | [docs/common-features.md](docs/common-features.md) | MU Plugin・カスタムプラグインによく作る機能一覧 |
 | [docs/theme-kadence.md](docs/theme-kadence.md) | Kadenceテーマのメモ・比較・Composerコマンド |
+| [docs/frontend.md](docs/frontend.md) | フロントエンド構成（Vite + Tailwind + TypeScript + Alpine.js） |
