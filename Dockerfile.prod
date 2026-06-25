@@ -42,6 +42,12 @@ COPY --from=frontend /app/build web/app/themes/my-themepro/build/
 # Composer依存関係をビルド時にインストール（本番用・dev除外）
 RUN composer install --no-dev --optimize-autoloader
 
+# 日本語翻訳ファイルをダウンロード（全ファイル）
+RUN mkdir -p web/app/languages \
+    && curl -sL https://downloads.wordpress.org/translation/core/6.9.4/ja.zip -o /tmp/ja.zip \
+    && unzip -q /tmp/ja.zip -d web/app/languages/ \
+    && rm /tmp/ja.zip
+
 # アップロードディレクトリはPVCでマウントするため空で用意
 RUN mkdir -p web/app/uploads \
     && chown -R www-data:www-data /var/www/html \
