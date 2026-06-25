@@ -12,8 +12,6 @@ spec:
       labels:
         app: wordpress
     spec:
-      imagePullSecrets:
-        - name: ghcr-pull-secret
       # コードをイメージからemptyDirへコピーし、nginx/php-fpmで共有する
       initContainers:
         - name: init-code
