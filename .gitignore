@@ -12,6 +12,8 @@ web/app/plugins/*
 web/app/themes/*
 !web/app/themes/.gitkeep
 !web/app/themes/my-themepro/
+web/app/themes/my-themepro/node_modules/
+web/app/themes/my-themepro/build/
 
 # mu-pluginsはbedrock-autoloader.phpのみgit管理
 web/app/mu-plugins/*

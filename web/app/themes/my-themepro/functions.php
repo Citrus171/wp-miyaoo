@@ -1,20 +1,18 @@
 <?php
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style(
-        'my-themepro-style',
-        get_template_directory_uri() . '/assets/css/main.css',
-        [],
-        '1.0.0'
-    );
+    $build_dir = get_template_directory() . '/build';
+    $build_uri = get_template_directory_uri() . '/build';
 
-    wp_enqueue_script(
-        'my-themepro-script',
-        get_template_directory_uri() . '/assets/js/main.js',
-        ['jquery'],
-        '1.0.0',
-        true
-    );
+    $css_file = $build_dir . '/assets/css/main.css';
+    if (file_exists($css_file)) {
+        wp_enqueue_style('my-themepro-style', $build_uri . '/assets/css/main.css', [], filemtime($css_file));
+    }
+
+    $js_file = $build_dir . '/assets/js/main.js';
+    if (file_exists($js_file)) {
+        wp_enqueue_script('my-themepro-script', $build_uri . '/assets/js/main.js', [], filemtime($js_file), true);
+    }
 });
 
 add_action('after_setup_theme', function () {
