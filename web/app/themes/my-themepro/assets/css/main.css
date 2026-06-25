@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.7;
+    color: #333;
+}
+
+header {
+    padding: 1rem 2rem;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+main {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+footer {
+    margin-top: 4rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    color: #999;
+    border-top: 1px solid #eee;
+}
