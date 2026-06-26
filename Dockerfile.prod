@@ -40,7 +40,11 @@ COPY . .
 COPY --from=frontend /app/build web/app/themes/my-themepro/build/
 
 # Composer依存関係をビルド時にインストール（本番用・dev除外）
-RUN composer install --no-dev --optimize-autoloader
+# QUIC接続失敗に備えてリトライ
+RUN for i in 1 2 3; do \
+      composer install --no-dev --optimize-autoloader --no-interaction && break; \
+      echo "Retry $i..."; sleep 5; \
+    done
 
 # 日本語翻訳ファイルをダウンロード（全ファイル）
 RUN mkdir -p web/app/languages \
