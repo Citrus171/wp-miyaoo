@@ -14,7 +14,7 @@ const observer = new IntersectionObserver(
       }
     })
   },
-  { threshold: 0.12 }
+  { threshold: 0.05, rootMargin: '0px 0px 100px 0px' }
 )
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
