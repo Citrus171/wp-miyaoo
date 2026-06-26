@@ -15,7 +15,7 @@
                     <ul class="space-y-3">
                         <li><a href="<?php echo esc_url(home_url('/')); ?>"      class="text-xs text-[#71717a] hover:text-[#09090b] transition-colors">ホーム</a></li>
                         <li><a href="<?php echo esc_url(home_url('/blog')); ?>"  class="text-xs text-[#71717a] hover:text-[#09090b] transition-colors">ブログ</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/about')); ?>" class="text-xs text-[#71717a] hover:text-[#09090b] transition-colors">About</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/about')); ?>" class="text-xs text-[#71717a] hover:text-[#09090b] transition-colors">概要</a></li>
                         <li><a href="<?php echo esc_url(home_url('/contact')); ?>" class="text-xs text-[#71717a] hover:text-[#09090b] transition-colors">お問い合わせ</a></li>
                     </ul>
                 </div>
