@@ -16,6 +16,17 @@ add_action('wp_enqueue_scripts', function () {
     }
 });
 
+// ─── ページ別JS（React） ───────────────────────────────────
+add_action('wp_enqueue_scripts', function () {
+    if (!is_page_template('page-react.php')) return;
+    $build_dir = get_template_directory() . '/build';
+    $build_uri = get_template_directory_uri() . '/build';
+    $js = $build_dir . '/assets/js/react.js';
+    if (file_exists($js)) {
+        wp_enqueue_script('react-demo', $build_uri . '/assets/js/react.js', [], filemtime($js), true);
+    }
+});
+
 // ─── テーマサポート ────────────────────────────────────────
 add_action('after_setup_theme', function () {
     add_theme_support('title-tag');

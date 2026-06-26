@@ -2,17 +2,6 @@
 /**
  * Template Name: React Examples
  */
-
-// React JSをenqueue
-add_action('wp_enqueue_scripts', function () {
-    $build_dir = get_template_directory() . '/build';
-    $build_uri = get_template_directory_uri() . '/build';
-    $js = $build_dir . '/assets/js/react.js';
-    if (file_exists($js)) {
-        wp_enqueue_script('react-demo', $build_uri . '/assets/js/react.js', [], filemtime($js), true);
-    }
-});
-
 get_header();
 
 function code_block(string $code): void {
