@@ -28,9 +28,11 @@ add_action('wp_enqueue_scripts', function () {
 });
 
 // Vite の ES module バンドルを type="module" で読み込む（スコープ分離）
+// WordPress が付ける type="text/javascript" を除去してから module を1つだけ付与
 add_filter('script_loader_tag', function (string $tag, string $handle): string {
     if (in_array($handle, ['my-themepro-script', 'react-demo'], true)) {
-        return str_replace('<script ', '<script type="module" ', $tag);
+        $tag = preg_replace('/\stype=([\'"])[^\'"]*\1/', '', $tag);
+        $tag = str_replace('<script ', '<script type="module" ', $tag);
     }
     return $tag;
 }, 10, 2);
