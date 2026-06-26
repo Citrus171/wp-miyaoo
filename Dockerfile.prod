@@ -32,6 +32,14 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# PHP設定（本番用）
+RUN { \
+    echo 'expose_php = Off'; \
+    echo 'opcache.enable = 1'; \
+    echo 'opcache.memory_consumption = 128'; \
+    echo 'opcache.validate_timestamps = 0'; \
+} > /usr/local/etc/php/conf.d/prod.ini
+
 WORKDIR /var/www/html
 
 COPY . .
