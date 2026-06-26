@@ -28,3 +28,6 @@ web/app/uploads/
 
 # 旧wp-content
 wp-content/
+
+# 個人メモ（git管理外）
+docs/vps.md
