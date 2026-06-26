@@ -18,3 +18,8 @@ const observer = new IntersectionObserver(
 )
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
+
+// TypeScript デモページ
+if (document.getElementById('demo-generics')) {
+  import('./typescript-demo').then(m => m.initTypescriptDemo())
+}
