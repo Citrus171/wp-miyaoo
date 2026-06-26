@@ -23,7 +23,7 @@
         <nav class="hidden md:flex items-center gap-8">
             <a href="<?php echo esc_url(home_url('/')); ?>"      class="nav-link text-sm">ホーム</a>
             <a href="<?php echo esc_url(home_url('/blog')); ?>"  class="nav-link text-sm">ブログ</a>
-            <a href="<?php echo esc_url(home_url('/about')); ?>" class="nav-link text-sm">About</a>
+            <a href="<?php echo esc_url(home_url('/about')); ?>" class="nav-link text-sm">概要</a>
         </nav>
 
         <div class="hidden md:block">
@@ -53,7 +53,7 @@
         <nav class="flex flex-col px-6 py-5 gap-4">
             <a href="<?php echo esc_url(home_url('/')); ?>"      @click="open=false" class="text-sm text-[#52525b] hover:text-[#09090b] transition-colors">ホーム</a>
             <a href="<?php echo esc_url(home_url('/blog')); ?>"  @click="open=false" class="text-sm text-[#52525b] hover:text-[#09090b] transition-colors">ブログ</a>
-            <a href="<?php echo esc_url(home_url('/about')); ?>" @click="open=false" class="text-sm text-[#52525b] hover:text-[#09090b] transition-colors">About</a>
+            <a href="<?php echo esc_url(home_url('/about')); ?>" @click="open=false" class="text-sm text-[#52525b] hover:text-[#09090b] transition-colors">概要</a>
             <a href="<?php echo esc_url(home_url('/contact')); ?>" @click="open=false" class="text-sm text-[#52525b] hover:text-[#09090b] transition-colors">お問い合わせ</a>
         </nav>
     </div>
