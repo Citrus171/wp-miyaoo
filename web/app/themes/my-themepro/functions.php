@@ -27,6 +27,14 @@ add_action('wp_enqueue_scripts', function () {
     }
 });
 
+// Vite の ES module バンドルを type="module" で読み込む（スコープ分離）
+add_filter('script_loader_tag', function (string $tag, string $handle): string {
+    if (in_array($handle, ['my-themepro-script', 'react-demo'], true)) {
+        return str_replace('<script ', '<script type="module" ', $tag);
+    }
+    return $tag;
+}, 10, 2);
+
 // ─── テーマサポート ────────────────────────────────────────
 add_action('after_setup_theme', function () {
     add_theme_support('title-tag');
