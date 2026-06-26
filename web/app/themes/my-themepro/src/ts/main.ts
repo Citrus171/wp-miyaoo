@@ -6,7 +6,7 @@ Alpine.start()
 
 // スクロールフェードイン
 const observer = new IntersectionObserver(
-  (entries) => {
+  entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible')
@@ -14,7 +14,7 @@ const observer = new IntersectionObserver(
       }
     })
   },
-  { threshold: 0.05, rootMargin: '0px 0px 100px 0px' }
+  { threshold: 0.05, rootMargin: '0px 0px 100px 0px' },
 )
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))

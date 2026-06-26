@@ -21,31 +21,26 @@ export function first<T>(items: T[]): T | undefined {
   return items[0]
 }
 
-export function groupBy<T, K extends string>(
-  items: T[],
-  key: (item: T) => K
-): Record<K, T[]> {
-  return items.reduce((acc, item) => {
-    const k = key(item)
-    acc[k] = acc[k] ?? []
-    acc[k].push(item)
-    return acc
-  }, {} as Record<K, T[]>)
+export function groupBy<T, K extends string>(items: T[], key: (item: T) => K): Record<K, T[]> {
+  return items.reduce(
+    (acc, item) => {
+      const k = key(item)
+      acc[k] = acc[k] ?? []
+      acc[k].push(item)
+      return acc
+    },
+    {} as Record<K, T[]>,
+  )
 }
 
 // ─── 3. 型ガード ──────────────────────────────────────────────
 export function isPost(value: unknown): value is Post {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    'id' in value &&
-    'title' in value
-  )
+  return typeof value === 'object' && value !== null && 'id' in value && 'title' in value
 }
 
 // Discriminated Union
 type Success<T> = { status: 'success'; data: T }
-type Failure     = { status: 'error';   message: string }
+type Failure = { status: 'error'; message: string }
 export type Result<T> = Success<T> | Failure
 
 export function unwrap<T>(result: Result<T>): T {
@@ -54,8 +49,8 @@ export function unwrap<T>(result: Result<T>): T {
 }
 
 // ─── 4. Utility Types ────────────────────────────────────────
-export type PostDraft    = Partial<Post>
-export type PostPreview  = Pick<Post, 'id' | 'title' | 'category'>
+export type PostDraft = Partial<Post>
+export type PostPreview = Pick<Post, 'id' | 'title' | 'category'>
 export type ImmutablePost = Readonly<Post>
 
 // ─── 5. async/await + fetch ───────────────────────────────────
@@ -70,7 +65,7 @@ export async function fetchPost(id: number): Promise<Result<JsonPlaceholderPost>
   try {
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
     if (!res.ok) return { status: 'error', message: `HTTP ${res.status}` }
-    const data = await res.json() as JsonPlaceholderPost
+    const data = (await res.json()) as JsonPlaceholderPost
     return { status: 'success', data }
   } catch (e) {
     return { status: 'error', message: String(e) }

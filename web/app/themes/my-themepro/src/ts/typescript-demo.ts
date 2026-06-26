@@ -1,9 +1,4 @@
-import {
-  filterBy, groupBy, first,
-  isPost, fetchPost,
-  PostStore,
-  type Post,
-} from './examples'
+import { filterBy, groupBy, first, isPost, fetchPost, PostStore, type Post } from './examples'
 
 // ─── デモ初期化 ──────────────────────────────────────────────
 export function initTypescriptDemo(): void {
@@ -16,17 +11,17 @@ export function initTypescriptDemo(): void {
 // ─── 2. Generics デモ ─────────────────────────────────────────
 function initGenericsDemo(): void {
   const posts: Post[] = [
-    { id: 1, title: 'TypeScript入門',    category: 'tech',   published: true  },
-    { id: 2, title: 'Tailwind CSS v4',   category: 'design', published: true  },
-    { id: 3, title: '週末の過ごし方',    category: 'life',   published: false },
-    { id: 4, title: 'Alpine.js Tips',    category: 'tech',   published: true  },
-    { id: 5, title: 'デザインシステム',  category: 'design', published: true  },
+    { id: 1, title: 'TypeScript入門', category: 'tech', published: true },
+    { id: 2, title: 'Tailwind CSS v4', category: 'design', published: true },
+    { id: 3, title: '週末の過ごし方', category: 'life', published: false },
+    { id: 4, title: 'Alpine.js Tips', category: 'tech', published: true },
+    { id: 5, title: 'デザインシステム', category: 'design', published: true },
   ]
 
-  const techPosts  = filterBy(posts, p => p.category === 'tech')
-  const published  = filterBy(posts, p => p.published)
-  const grouped    = groupBy(posts, p => p.category)
-  const topPost    = first(posts)
+  const techPosts = filterBy(posts, p => p.category === 'tech')
+  const published = filterBy(posts, p => p.published)
+  const grouped = groupBy(posts, p => p.category)
+  const topPost = first(posts)
 
   const el = document.getElementById('demo-generics')
   if (!el) return
@@ -43,7 +38,9 @@ function initGenericsDemo(): void {
       </div>
       <div class="flex items-center gap-2">
         <span class="text-xs text-[#a1a1aa] w-40 shrink-0">groupBy(category)</span>
-        <span class="text-[#09090b]">${Object.entries(grouped).map(([k, v]) => `${k}: ${v.length}件`).join(' / ')}</span>
+        <span class="text-[#09090b]">${Object.entries(grouped)
+          .map(([k, v]) => `${k}: ${v.length}件`)
+          .join(' / ')}</span>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-xs text-[#a1a1aa] w-40 shrink-0">first()</span>
@@ -73,26 +70,30 @@ function initTypeGuardDemo(): void {
       isPost: isPost(s),
     }))
 
-    out.innerHTML = results.map(r => `
+    out.innerHTML = results
+      .map(
+        r => `
       <div class="flex items-center gap-3">
         <span class="${r.isPost ? 'text-green-600' : 'text-[#a1a1aa]'} text-xs w-4">${r.isPost ? '✓' : '✕'}</span>
         <code class="text-xs text-[#52525b] font-mono">${r.value}</code>
       </div>
-    `).join('')
+    `,
+      )
+      .join('')
   })
 }
 
 // ─── 6. Class デモ ────────────────────────────────────────────
 function initClassDemo(): void {
   const store = new PostStore('My Blog')
-  let nextId  = 1
+  let nextId = 1
 
-  const input  = document.getElementById('class-input')   as HTMLInputElement | null
+  const input = document.getElementById('class-input') as HTMLInputElement | null
   const btnAdd = document.getElementById('class-btn-add')
   const btnClr = document.getElementById('class-btn-clear')
-  const list   = document.getElementById('class-list')
-  const count  = document.getElementById('class-count')
-  const sname  = document.getElementById('class-name')
+  const list = document.getElementById('class-list')
+  const count = document.getElementById('class-count')
+  const sname = document.getElementById('class-name')
 
   if (!input || !btnAdd || !list || !count || !sname) return
 
@@ -101,15 +102,20 @@ function initClassDemo(): void {
   const render = (): void => {
     const posts = store.getAll()
     count.textContent = String(store.count())
-    list.innerHTML = posts.length === 0
-      ? '<p class="text-xs text-[#a1a1aa]">まだ投稿がありません</p>'
-      : [...posts].map(p => `
+    list.innerHTML =
+      posts.length === 0
+        ? '<p class="text-xs text-[#a1a1aa]">まだ投稿がありません</p>'
+        : [...posts]
+            .map(
+              p => `
           <div class="flex items-center justify-between gap-2 py-1.5 border-b border-[#f4f4f5] last:border-0">
             <span class="text-sm text-[#09090b]">${p.title}</span>
             <button data-id="${p.id}"
               class="text-xs text-[#a1a1aa] hover:text-red-500 transition-colors remove-btn">削除</button>
           </div>
-        `).join('')
+        `,
+            )
+            .join('')
 
     list.querySelectorAll<HTMLButtonElement>('.remove-btn').forEach(btn => {
       btn.addEventListener('click', () => {

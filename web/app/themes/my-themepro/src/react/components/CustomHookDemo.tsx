@@ -17,26 +17,32 @@ export function CustomHookDemo() {
 
   return (
     <div className="space-y-6">
-
       {/* useFetch */}
       <div>
-        <p className="text-xs font-semibold text-[#09090b] mb-2">useFetch — データ取得 + AbortController</p>
+        <p className="text-xs font-semibold text-[#09090b] mb-2">
+          useFetch — データ取得 + AbortController
+        </p>
         <div className="flex gap-2 mb-3 flex-wrap">
           {[1, 2, 3, 4, 5].map(id => (
-            <button key={id} onClick={() => setPostId(id)}
+            <button
+              key={id}
+              onClick={() => setPostId(id)}
               className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
                 postId === id
                   ? 'bg-[#09090b] text-white border-[#09090b]'
                   : 'border-[#e4e4e7] text-[#52525b] hover:border-[#a1a1aa]'
-              }`}>
+              }`}
+            >
               Post {id}
             </button>
           ))}
         </div>
         <div className="border border-[#e4e4e7] rounded-xl p-4 min-h-[60px] bg-[#fafafa] text-sm">
-          {state.status === 'idle'    && <span className="text-[#a1a1aa]">ボタンを選択してください</span>}
+          {state.status === 'idle' && (
+            <span className="text-[#a1a1aa]">ボタンを選択してください</span>
+          )}
           {state.status === 'loading' && <span className="text-[#a1a1aa]">取得中...</span>}
-          {state.status === 'error'   && <span className="text-red-500">{state.message}</span>}
+          {state.status === 'error' && <span className="text-red-500">{state.message}</span>}
           {state.status === 'success' && (
             <div>
               <p className="font-medium text-[#09090b] mb-1">{state.data.title}</p>
@@ -48,7 +54,9 @@ export function CustomHookDemo() {
 
       {/* useLocalStorage */}
       <div>
-        <p className="text-xs font-semibold text-[#09090b] mb-2">useLocalStorage — リロードしても保持</p>
+        <p className="text-xs font-semibold text-[#09090b] mb-2">
+          useLocalStorage — リロードしても保持
+        </p>
         <textarea
           value={note}
           onChange={e => setNote(e.target.value)}
@@ -56,9 +64,10 @@ export function CustomHookDemo() {
           rows={3}
           className="w-full border border-[#e4e4e7] rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#a1a1aa] transition resize-none"
         />
-        <p className="text-xs text-[#a1a1aa] mt-1">Key: <code className="font-mono">react-demo-note</code></p>
+        <p className="text-xs text-[#a1a1aa] mt-1">
+          Key: <code className="font-mono">react-demo-note</code>
+        </p>
       </div>
-
     </div>
   )
 }

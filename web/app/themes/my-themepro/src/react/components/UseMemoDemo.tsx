@@ -7,7 +7,7 @@ const ITEMS = Array.from({ length: 1000 }, (_, i) => ({
   score: Math.floor(Math.random() * 100),
 }))
 
-type Item = typeof ITEMS[0]
+type Item = (typeof ITEMS)[0]
 
 interface RowProps {
   item: Item
@@ -22,7 +22,9 @@ function Row({ item, onSelect }: RowProps) {
     >
       <span className="text-sm text-[#09090b]">{item.name}</span>
       <div className="flex items-center gap-2">
-        <span className="text-xs bg-[#f4f4f5] text-[#71717a] px-2 py-0.5 rounded-full">{item.category}</span>
+        <span className="text-xs bg-[#f4f4f5] text-[#71717a] px-2 py-0.5 rounded-full">
+          {item.category}
+        </span>
         <span className="text-xs font-mono text-[#a1a1aa] w-6 text-right">{item.score}</span>
       </div>
     </div>
@@ -35,9 +37,10 @@ export function UseMemoDemo() {
 
   // useMemo: queryが変わった時だけフィルタリングを再計算
   const filtered = useMemo(() => {
-    return ITEMS.filter(item =>
-      item.name.toLowerCase().includes(query.toLowerCase()) ||
-      item.category.toLowerCase().includes(query.toLowerCase())
+    return ITEMS.filter(
+      item =>
+        item.name.toLowerCase().includes(query.toLowerCase()) ||
+        item.category.toLowerCase().includes(query.toLowerCase()),
     ).slice(0, 8)
   }, [query])
 
@@ -62,9 +65,7 @@ export function UseMemoDemo() {
           <Row key={item.id} item={item} onSelect={handleSelect} />
         ))}
       </div>
-      {selected && (
-        <p className="text-xs text-[#71717a]">選択: Item {selected}</p>
-      )}
+      {selected && <p className="text-xs text-[#71717a]">選択: Item {selected}</p>}
     </div>
   )
 }
