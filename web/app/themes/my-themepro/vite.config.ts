@@ -3,11 +3,16 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [tailwindcss()],
+  esbuild: {
+    jsx: 'automatic',
+    jsxImportSource: 'react',
+  },
   build: {
     outDir: 'build',
     rollupOptions: {
       input: {
         main: 'src/ts/main.ts',
+        react: 'src/react/main.tsx',
       },
       output: {
         entryFileNames: 'assets/js/[name].js',
